@@ -1,0 +1,54 @@
+<!-- railways-table.html -->
+
+<div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 col-lg-offset-2 main">
+  <h1 class="page-header">Railway Stations</h1>
+  <div class="row">
+    <form name="userForm">
+      <div class="form-group col-md-2 col-lg-2">
+        <label class="userInput" for="railwayPostcode">Postcode:</label>
+        <input id="railwayPostcode" type="text" ng-model="postcodeInput.postcodeUserInput"
+               ng-model-options="{ getterSetter: true }" class="form-control" placeholder="Postcode">
+      </div>
+      <div class="form-group col-md-2 col-lg-2">
+        <label for="railwayDistance" class="userInput">Distance (km):</label>
+        <input id="railwayDistance" type="text" ng-model="distanceInput.distanceUserInput"
+               ng-model-options="{ getterSetter: true }" class="form-control"  placeholder="Distance">
+      </div>
+      <div class="form-group col-md-5 col-lg-5">
+        <label for="searchInput">Search:</label>
+        <input id="searchInput" class="form-control" ng-model="userSearch.searchUserInput"
+               ng-model-options="{ getterSetter: true }" type="text"
+               placeholder="Search...">
+      </div>
+      <div class="form-group btnDiv">
+        <label for="railwayBtnSubmit"></label>
+        <button id="railwayBtnSubmit" class="btn btn-success" type="button" ng-click="callData()">Submit</button>
+      </div>
+    </form>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Station Name</th>
+        <th>Distance (km)</th>
+        <th>tiploc Code</th>
+        <th>atco Code</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="x in railways.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+        <td>{{x.stationname}}</td>
+        <td>{{x.distance}}</td>
+        <td>{{x.tiploccode}}</td>
+        <td>{{x.atcocode}}</td>
+      </tr>
+      <tr ng-if="railways.length === 0">
+        <td colspan="4" class="text-center">No Results Found.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm"
+      items-per-page="itemsPerPage" max-size="maxSize" boundary-link-numbers="true"></ul>
+</div>
